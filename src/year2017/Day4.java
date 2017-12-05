@@ -1,5 +1,6 @@
 package year2017;
 
+import org.testng.annotations.Test;
 import util.Utils;
 
 import java.io.*;
@@ -9,12 +10,11 @@ public class Day4 {
     public static void main(String[] args) throws IOException {
         File file = Utils.getFile("year2017/Day4-input.txt");
 
-
-//        testHasAnagrams();
         calcPolicy1(file);
     }
 
-    private static void testHasAnagrams() {
+    @Test
+    public static void testHasAnagrams() {
         Set<String> set = new HashSet<>();
 
         set.add("sil");
@@ -40,7 +40,7 @@ public class Day4 {
                 // check for bad input
                 for (String string : strings) {
                     if (string.length() == 0) {
-                        System.out.println("XXXXXXXXX");
+                        throw new RuntimeException("bad input: " + string);
                     }
                 }
 
@@ -51,7 +51,7 @@ public class Day4 {
 
                     // additional anagram check for policy 2
                     if (!hasAnagrams(set)) {
-                        System.out.println("No anagrams: " + set);
+//                        System.out.println("No anagrams: " + set);
                         policy2Count++;
                     } else {
 //                        System.out.println("Has anagrams: " + set);
