@@ -27,11 +27,11 @@ public class Day6 {
     }
 
     public void allocate(List<Integer> input) {
-        boolean run = true;
         Integer blocks = 0;
         int loopCount = 0;
+        int iterations = 0;
 
-        while (run) {
+        while (iterations < 2) {
             // find index for largest item
             int index = findLargestItemIndex(input);
             blocks = input.get(index);
@@ -50,21 +50,24 @@ public class Day6 {
                 item += 1;
                 input.set(index, item);
             }
+//            System.out.println("inputList = " + input);
             // calc hash
             String hash = calcDigest(input.toArray(new Integer[]{}));
-            // check for hash in hashs - if hash in hashs, we're done
+            // check for hash in hashs - if hash in hashs we have a repeat
             if (hashs.contains(hash)) {
-                run = false;
+                System.out.println("found repeat = " + loopCount);
+                iterations++;
+                // reset state for part 2
+                loopCount = 0;
+                hashs = new ArrayList<>();
+                hashs.add(hash);
             } else {
                 // if not done, add hash to hashs
                 hashs.add(hash);
             }
 
-//            System.out.println("inputList = " + input);
             loopCount++;
         }
-
-        System.out.println("loopCount = " + loopCount);
     }
 
     @Test
@@ -73,7 +76,7 @@ public class Day6 {
     }
 
     @Test
-    public void testTestInput() {
+    public void runTest() {
         allocate(testInputList);
     }
 
