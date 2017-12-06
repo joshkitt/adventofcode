@@ -4,12 +4,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.DatatypeConverter;
-import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class Day6 {
