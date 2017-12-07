@@ -68,11 +68,34 @@ public class Day7 {
 
     private void findAdjustedSize(Server unbalancedServer) {
         // we know child servers are balanced
-        // find difference from common load size
+
+        // find common load size
+        int commonSize = 0;
+        Set<Number> set = new HashSet<>();
         for (Server childServer : unbalancedServer.servers) {
             int thisSize = childServer.calcLoadSize();
             System.out.println("childServer = " + childServer);
             System.out.println("thisSize = " + thisSize);
+
+            boolean add = set.add(thisSize);
+            if (!add) {
+                // this is the common size
+                System.out.println("common size = " + thisSize);
+                commonSize = thisSize;
+            }
+        }
+
+        // find off-balance diff from common size
+        for (Server childServer : unbalancedServer.servers) {
+            int thisSize = childServer.calcLoadSize();
+            if (thisSize != commonSize) {
+                // found our server to adjust
+                System.out.println("server to adjust = " + childServer);
+                int diff = thisSize - commonSize;
+                System.out.println("adjust by diff = " + diff);
+                int newValue = childServer.size - diff;
+                System.out.println("server should have new value: " + newValue);
+            }
         }
     }
 
