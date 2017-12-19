@@ -14,10 +14,13 @@ public class Day9 {
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         String input = br.readLine();
-        System.out.println("input = " + input);
-
-        String ignored = stripIgnored(input);
-        System.out.println("ignored = " + ignored);
+//        System.out.println("input = " + input);
+//
+//        String ignored = stripIgnored(input);
+//        System.out.println("ignored = " + ignored);
+//
+//        String stripped = stripGarbage(ignored);
+//        System.out.println("garbage = " + stripped);
 
         int score = parseScore(stripGarbage(stripIgnored(input)));
         System.out.println("score = " + score);
