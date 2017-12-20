@@ -29,10 +29,13 @@ public class Day19 {
         // find start of puzzle line index
         int index = lines.get(0).indexOf('|');
         int lineNumber = 0;
+        int steps = 0;
         DIR dir = DIR.SOUTH;
         StringBuffer milePosts = new StringBuffer();
 
         while (true) {
+            steps++;
+
             switch (dir) {
                 case NORTH:
                     lineNumber--;
@@ -65,22 +68,23 @@ public class Day19 {
             if (c == '+') {
                 // need to change direction
                 // look for next direction
+                // @TODO these checks could throw out of bounds exceptions, but doesn't for the puzzle input
                 switch (dir) {
                     case NORTH:
                         // look east, west
-                        dir = lines.get(lineNumber).charAt(index + 1) == '-' ? DIR.EAST : DIR.WEST;
+                        dir = lines.get(lineNumber).charAt(index + 1) != ' ' ? DIR.EAST : DIR.WEST;
                         break;
                     case SOUTH:
                         // look east, west
-                        dir = lines.get(lineNumber).charAt(index + 1) == '-' ? DIR.EAST : DIR.WEST;
+                        dir = lines.get(lineNumber).charAt(index + 1) != ' ' ? DIR.EAST : DIR.WEST;
                         break;
                     case EAST:
                         // look north, south
-                        dir = lines.get(lineNumber + 1).charAt(index) == '|' ? DIR.SOUTH : DIR.NORTH;
+                        dir = lines.get(lineNumber + 1).charAt(index) != ' ' ? DIR.SOUTH : DIR.NORTH;
                         break;
                     case WEST:
                         // look north, south
-                        dir = lines.get(lineNumber + 1).charAt(index) == '|' ? DIR.SOUTH : DIR.NORTH;
+                        dir = lines.get(lineNumber + 1).charAt(index) != ' ' ? DIR.SOUTH : DIR.NORTH;
                         break;
                 }
 //                System.out.println("dir = " + dir);
@@ -88,6 +92,7 @@ public class Day19 {
         }
 
         System.out.println("milePosts = " + milePosts);
+        System.out.println("steps = " + steps);
     }
 
     enum DIR {
